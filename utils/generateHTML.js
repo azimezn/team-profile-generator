@@ -19,21 +19,21 @@ function generateHTML(data) {
             <header>
                 <h1>My Team</h1>
             </header>
-            <section class="row">
+            <section class="row row-cols-1 row-cols-md-3 g-4">
                 <div class="col-sm-6">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body">
-                            <h2 class="card-title">${Manager.name}<br>Manager</h2>
+                            <h2 class="card-title">${data.managerName}<br>Manager</h2>
                             <ul class="card-text">
-                                <li>${Manager.id}</li>
-                                <li>${Manager.email}</li>
-                                <li>${Manager.number}</li>
+                                <li>${data.managerID}</li>
+                                <li>${data.managerEmail}</li>
+                                <li>${data.managerNumber}</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </section>
-            <script src="./script.js"></script>
+            <script src="./index.js"></script>
         </body>
         
         </html>
