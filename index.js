@@ -18,7 +18,3 @@ function init() {
 
 init();
 
-const managerName = prompt("What is the team manager's\n name?");
-const managerID = prompt("What is the team manager's\n employee ID?");
-const managerEmail = prompt("What is the team manager's\n email?");
-const managerNumber = prompt("What is the team manager's\n office number?");
