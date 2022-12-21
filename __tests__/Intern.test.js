@@ -8,7 +8,7 @@ test("Should set school", () => {
 
 test("Should get school", () => {
   const internSchool = "Rutgers";
-  const Azime = new Intern("Azime", 312, "hello@gmail.com", ineternSchool);
+  const Azime = new Intern("Azime", 312, "hello@gmail.com", internSchool);
   expect(Azime.getSchool()).toBe(internSchool);
 });
 
