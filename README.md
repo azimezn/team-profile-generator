@@ -10,11 +10,12 @@ The team profile generator creates an HTML file with the information for every m
 - [Usage](#usage)
 - [Credits](#credits)
 - [License](#license)
+- [Tests](#tests)
 
 ## Installation
 
 - inquirer version 8.2.4
-- jest version 24.8.0 (this is need for the testing)
+- jest version 24.8.0 (this is needed for the testing)
 
 ## Usage
 
@@ -29,3 +30,7 @@ Answer questions through the command-line application and the HTML file will be 
 ## License
 
 N/A
+
+## Tests
+
+You can run tests through the command-line by typing "npm run tests". Make sure you have jest version 24.8.0 installed first.
