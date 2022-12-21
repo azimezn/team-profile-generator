@@ -2,10 +2,8 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const generateHTML = require("./utils/generateHTML");
-const pageTemplate = require("./src/page-template");
 
 // classes
-const Employee = require("./lib/Employee")
 const Manager = require("./lib/Manager")
 const Engineer = require("./lib/Engineer")
 const Intern = require("./lib/Intern");
