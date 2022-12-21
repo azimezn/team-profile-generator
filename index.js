@@ -100,28 +100,34 @@ const questions = {
 
 function addManager() {
     inquirer
-    .prompt(questions.manager)
-    .then((data) => {
-        if (data.addMember == "Engineer") {
-            return addEngineer()
-        } else if (data.addMember == "Intern") {
-            return addIntern()
-        } else {
-
-        }
-    })
+        .prompt(questions.manager)
+        .then((data) => {
+            const member = new Manager(data.managerName, data.managerID, data.managerEmail, data.managerNumber)
+            teamMembers.push(member);
+            employeeIDs.push(data.managerID);
+            if (data.addMember == "Engineer") {
+                return addEngineer();
+            } else if (data.addMember == "Intern") {
+                return addIntern();
+            } else {
+                return createTeam();
+            }
+        })
 }
 
 function addEngineer() {
     inquirer
         .prompt(questions.engineer)
         .then((data) => {
+            const member = new Engineer(data.engineerName, data.engineerID, data.engineerEmail, data.engineerGithub)
+            teamMembers.push(member);
+            employeeIDs.push(data.engineerID);
             if (data.addMember == "Engineer") {
                 return addEngineer()
             } else if (data.addMember == "Intern") {
                 return addIntern()
             } else {
-
+                return createTeam();
             }
         })
 }
@@ -130,32 +136,29 @@ function addIntern() {
     inquirer
         .prompt(questions.intern)
         .then((data) => {
+            const member = new Intern(data.internName, data.internID, data.internEmail, data.internSchool)
+            teamMembers.push(member);
+            employeeIDs.push(data.internID);
             if (data.addMember == "Engineer") {
                 return addEngineer()
             } else if (data.addMember == "Intern") {
                 return addIntern()
             } else {
-
+                return createTeam();
             }
         })
 }
 
+function createTeam() {
+    fs.writeFileSync("./dist/index.html", generateHTML(teamMembers), (err) =>
+        err ? console.log(err) : console.log('Success!')
+    );
+}
 
-// function init() {
-
-//     inquirer
-//         .prompt(questions)
-//         .then((data) => {
-//             fs.writeFileSync("index.html", generateHTML({ ...data }), (err) =>
-//                 err ? console.log(err) : console.log('Success!')
-//             );
-//         });
-// }
-
-// init();
-
-
-
+function init() {
+    addManager();
+}
+init();
 
 
 
@@ -165,24 +168,12 @@ function addIntern() {
 
 //pseudo code
 
-
 // 3.
 // create variable to hold the path to dist subfolder using path lib resolve method
 // create variable to hold the path to team.html using path lib join method
 
 // 5.
 // print user of usage
-
-// 6.
-// make call to create manager function to start the main process
-
-// 7.
-// create manager function
-// - ask the questions for name, id, email, office number for manager using inquirer
-// - in the .then callback function, create manager object by instantiating Manager class instance, passing in name, id, office number as arguments to constructor
-// - push the manager object to the employee member array
-// - push the manager id to the employee id array
-// - make call to the create team function
 
 // 8.
 // create team function
@@ -191,22 +182,6 @@ function addIntern() {
 // - make call to add-engineer-function if the choice is engineer
 // - make call to add-intern-function if choice is intern
 // - make call to build-team function if choice is end of adding employee
-
-// 8.
-// add engineer function
-// - prompt user with questions for engineer name, id, email, and github name
-// - in .then callback create engineer object by instantiating Engineer class instance passing name, id, email, and github as arguments to class constructor
-// - push engineer object to employee member array
-// - push engineer id to employee id array
-// - make call to create team function
-
-// 9.
-// add intern function
-// - prompt user with questions for intern name, id, email, and school
-// - in .then callback create intern object by instantiating Intern class instance passing name, id, email, and school as arguments to class constructor
-// - push intern object to employee member array
-// - push intern id to employee id array
-// - make call to create team function
 
 // 10.
 // build team function
