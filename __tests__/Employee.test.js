@@ -1,4 +1,7 @@
+// connect to the Employee.js
 const Employee = require("../lib/Employee");
+
+// test the arguments and functions of class Employee
 
 test("Should instantiate Employee instance", () => {
   const newEmployee = new Employee();

@@ -1,14 +1,15 @@
-const { left } = require("inquirer/lib/utils/readline");
-
+// function to generate the HTML with the teamMembers passed in from index.js through fs.writeFileSync
 function generateHTML(teamMembers) {
 
+    // for loop to go through the teamMembers array and get the appropriate HTML text with the getHTML function for each member
     let membersHTML = ``
     for (let member of teamMembers) {
-       membersHTML+= member.getHTML()
+        membersHTML += member.getHTML()
     }
 
+    // the HTML text with the necessary adjustments from membersHTML
     const htmlInfo =
-    `
+        `
         <!DOCTYPE html>
         <html lang="en">
         
@@ -37,28 +38,3 @@ function generateHTML(teamMembers) {
 }
 
 module.exports = generateHTML;
-
-
-
-
-
-
-// let managers = teamMembers.filter(Manager);
-// let engineers = teamMembers.filter(Engineer);
-// let interns = teamMembers.filter(Intern);
-
-// for (let i = 0; i < managers.length; i++) {
-//     managers[i];
-//     `<div class="col-sm-6">
-//     <div class="card h-100">
-//         <div class="card-body">
-//             <h2 class="card-title">${managers[i].managerName}<br>Manager</h2>
-//             <ul class="card-text">
-//                 <li>${managers[i].managerID}</li>
-//                 <li>${managers[i].managerEmail}</li>
-//                 <li>${managers[i].managerNumber}</li>
-//             </ul>
-//         </div>
-//     </div>
-// </div>`
-// }

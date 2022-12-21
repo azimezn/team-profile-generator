@@ -1,4 +1,7 @@
+// connect to the Engineer.js
 const Engineer = require("../lib/Engineer");
+
+// test the arguments and functions added in class Engineer
 
 test("Should set GitHub account", () => {
   const engineerGithub = "azimezn";

@@ -8,9 +8,10 @@ const Manager = require("./lib/Manager")
 const Engineer = require("./lib/Engineer")
 const Intern = require("./lib/Intern");
 
+// other variables
 const teamMembers = [];
-const employeeIDs = [];
 
+// questions specific for each type of team member
 const questions = {
     manager: [
         {
@@ -37,7 +38,7 @@ const questions = {
             type: 'list',
             message: 'Which type of team member would you like to add?',
             name: 'addMember',
-            choices: ["Engineer", "Intern", "I don't need to add any more members."],
+            choices: ["Engineer", "Intern", "I don't need to add any more team members."],
         }],
 
     engineer: [
@@ -65,7 +66,7 @@ const questions = {
             type: 'list',
             message: 'Which type of team member would you like to add?',
             name: 'addMember',
-            choices: ["Engineer", "Intern", "I don't need to add any more members."],
+            choices: ["Engineer", "Intern", "I don't need to add any more team members."],
         }],
 
     intern: [
@@ -93,21 +94,27 @@ const questions = {
             type: 'list',
             message: 'Which type of team member would you like to add?',
             name: 'addMember',
-            choices: ["Engineer", "Intern", "I don't need to add any more members."],
+            choices: ["Engineer", "Intern", "I don't need to add any more team members."],
         }]
 }
 
 function addManager() {
     inquirer
+        // ask the manager questions
         .prompt(questions.manager)
         .then((data) => {
+            // creat a new Manager object with the data(answers) from the questions
             const member = new Manager(data.managerName, data.managerID, data.managerEmail, data.managerNumber)
+            // add this object into the teamMembers array
             teamMembers.push(member);
-            employeeIDs.push(data.managerID);
+            // for the last question,
+            // if they chose to add an engineer, go to function addEngineer to get information about the engineer
             if (data.addMember == "Engineer") {
                 return addEngineer();
+                // if they chose to add an intern, go to function addIntern to get information about the intern
             } else if (data.addMember == "Intern") {
                 return addIntern();
+                // if they don't need to add any more team members, go to the createTeam function to create the HTML with all of the information
             } else {
                 return createTeam();
             }
@@ -120,7 +127,6 @@ function addEngineer() {
         .then((data) => {
             const member = new Engineer(data.engineerName, data.engineerID, data.engineerEmail, data.engineerGithub)
             teamMembers.push(member);
-            employeeIDs.push(data.engineerID);
             if (data.addMember == "Engineer") {
                 return addEngineer()
             } else if (data.addMember == "Intern") {
@@ -137,7 +143,6 @@ function addIntern() {
         .then((data) => {
             const member = new Intern(data.internName, data.internID, data.internEmail, data.internSchool)
             teamMembers.push(member);
-            employeeIDs.push(data.internID);
             if (data.addMember == "Engineer") {
                 return addEngineer()
             } else if (data.addMember == "Intern") {
@@ -149,45 +154,18 @@ function addIntern() {
 }
 
 function createTeam() {
+    // create the HTML file (in the dist folder) with the information received
+    // passes teamMembers array to the generateHTML.js to create specific HTML for the team members information gathered with the questions
     fs.writeFileSync("./dist/index.html", generateHTML(teamMembers), (err) =>
         err ? console.log(err) : console.log('Success!')
     );
 }
 
+// start with the addManager() function
 function init() {
     addManager();
 }
 init();
-
-
-
-
-
-
-
-//pseudo code
-
-// 3.
-// create variable to hold the path to dist subfolder using path lib resolve method
-// create variable to hold the path to team.html using path lib join method
-
-// 5.
-// print user of usage
-
-// 8.
-// create team function
-// - prompt user with the list of choices for Engineer, Intern, or End of adding employee for the team
-// - in .then callback function check what the user choice is and make call to the corresponding functions respectively
-// - make call to add-engineer-function if the choice is engineer
-// - make call to add-intern-function if choice is intern
-// - make call to build-team function if choice is end of adding employee
-
-// 10.
-// build team function
-// - check existing of dist subfolder
-// - if not exist, create the dist subfolder
-// - make call to imported render function passing employee member array as argument and assign returned html to a variable
-// - make call to fs write file function passing the html file path, html variable
 
 
 
